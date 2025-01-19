@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch</title>
+</head>
+<body>
+
+  <h1>Stopwatch</h1>
+  <div id="stopwatch">00:00</div>
+  <button id="startBtn">Start</button>
+  <button id="stopBtn">Stop</button>
+  <button id="resetBtn">Reset</button>
+
+  <script>
+    let seconds = 0;
+    let minutes = 0;
+    let interval;
+
+    function updateDisplay() {
+      document.getElementById('stopwatch').textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }
+
+    function startStopwatch() {
+      interval = setInterval(() => {
+        seconds++;
+        if (seconds === 60) {
+          seconds = 0;
+          minutes++;
+        }
+        updateDisplay();
+      }, 1000);
+    }
+
+    function stopStopwatch() {
+      clearInterval(interval);
+    }
+
+    function resetStopwatch() {
+      seconds = 0;
+      minutes = 0;
+      updateDisplay();
+      clearInterval(interval);
+    }
+
+    document.getElementById('startBtn').addEventListener('click', startStopwatch);
+    document.getElementById('stopBtn').addEventListener('click', stopStopwatch);
+    document.getElementById('resetBtn').addEventListener('click', resetStopwatch);
+  </script>
+  <!-- <h1>Water Reminder</h1>
+  <p id="reminder-message">You haven't received a reminder yet.</p>
+
+  <script>
+    function showReminder() {
+      document.getElementById('reminder-message').textContent = "Time to drink water! 💧";
+    }
+
+    
+    function setWaterReminder() {
+      setTimeout(() => {
+        showReminder();
+
+        setWaterReminder();
+      }, 3600000); 
+    }
+    setWaterReminder();
+  </script> -->
+
+</body>
+</html> 
+
